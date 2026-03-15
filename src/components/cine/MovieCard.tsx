@@ -6,7 +6,6 @@ export default function MovieCard({movie}:{movie:any}) {
     return (
         <figure className="p-4 border border-black/10 shadow-sm dark:border-white/10 rounded-xl">
             <img className="w-full object-cover" src={getMovieUrl(movie.cover)} alt={movie.title} />
-            {getMovieUrl(movie.cover)}
             <figcaption className="pt-4">
                 <h3 className="text-xl mb-1 text-black">{movie.title}</h3>
                 <p className="text-[#575A6E] text-sm mb-2">{movie.genre}</p>
