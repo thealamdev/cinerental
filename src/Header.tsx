@@ -1,3 +1,4 @@
+import logo from './assets/logo.svg';
 import ring from './assets/ring.svg';
 import sum from './assets/icons/sun.svg';
 import ShopingCard from './assets/shopping-cart.svg';
@@ -7,7 +8,7 @@ export default function Header() {
         <header>
             <nav className="container flex items-center justify-between space-x-10 py-6">
                 <a href="index.html">
-                    <img src="./assets/logo.svg" width="139" height="26" alt="" />
+                    <img src={logo} width="139" height="26" alt="logo" />
                 </a>
 
                 <ul className="flex items-center space-x-5">
