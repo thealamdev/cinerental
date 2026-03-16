@@ -2,6 +2,7 @@ import { useContext } from "react";
 import { CardContext } from "../../contexts/CardContext";
 import { getMovieUrl } from "../../utility/getMovieUrl";
 import deleteIcon from '../../assets/delete.svg';
+import checkoutIcon from '../../assets/icons/checkout.svg';
 
 interface PageProps {
     onClose: () => void;
@@ -11,6 +12,15 @@ export default function CardModal({
     onClose
 }: PageProps) {
     const { card, setCard } = useContext(CardContext)!;
+
+    const handleRemoveCard = (movie: any) => {
+        setCard((prev: any) => (
+            prev.filter((item: any) => (
+                item.id !== movie.id
+            ))
+        ))
+    }
+
     return (
         <div
             className="fixed top-0 left-0 w-screen h-screen z-50 bg-black/10 backdrop-blur-xs"
@@ -25,32 +35,37 @@ export default function CardModal({
                     <div
                         className="space-y-8 lg:space-y-12 max-h-[450px] overflow-auto mb-10 lg:mb-14"
                     >
-                        {card.map((item: any) => (
-                            <div className="grid grid-cols-[1fr_auto] gap-4">
-                                <div className="flex items-center gap-4">
-                                    <img
-                                        className="rounded overflow-hidden w-[80px] h-[100px]"
-                                        src={getMovieUrl(item.cover)}
-                                        alt=""
-                                    />
-                                    <div>
-                                        <h3 className="text-base md:text-xl font-bold">{item.title}</h3>
-                                        <p className="max-md:text-xs text-[#575A6E]">
-                                            {item.genre}
-                                        </p>
-                                        <span className="max-md:text-xs">${item.price}</span>
+                        {
+                            card.length > 0 ? (
+                                card.map((item: any) => (
+                                    <div className="grid grid-cols-[1fr_auto] gap-4">
+                                        <div className="flex items-center gap-4">
+                                            <img
+                                                className="rounded overflow-hidden w-[80px] h-[100px]"
+                                                src={getMovieUrl(item.cover)}
+                                                alt=""
+                                            />
+                                            <div>
+                                                <h3 className="text-base md:text-xl font-bold">{item.title}</h3>
+                                                <p className="max-md:text-xs text-[#575A6E]">
+                                                    {item.genre}
+                                                </p>
+                                                <span className="max-md:text-xs">${item.price}</span>
+                                            </div>
+                                        </div>
+                                        <div className="flex justify-between gap-4 items-center">
+                                            <button
+                                                onClick={() => handleRemoveCard(item)}
+                                                className="bg-[#D42967] rounded-md p-2 md:px-4 inline-flex items-center space-x-2 text-white"
+                                            >
+                                                <img className="w-5 h-5" src={deleteIcon} alt="delete" />
+                                                <span className="max-md:hidden">Remove</span>
+                                            </button>
+                                        </div>
                                     </div>
-                                </div>
-                                <div className="flex justify-between gap-4 items-center">
-                                    <button
-                                        className="bg-[#D42967] rounded-md p-2 md:px-4 inline-flex items-center space-x-2 text-white"
-                                    >
-                                        <img className="w-5 h-5" src={deleteIcon} alt="delete" />
-                                        <span className="max-md:hidden">Remove</span>
-                                    </button>
-                                </div>
-                            </div>
-                        ))
+                                ))) : (
+                                <div className="text-xl text-red-500">No Data found!</div>
+                            )
                         }
                     </div>
                     <div className="flex items-center justify-end gap-2">
@@ -58,16 +73,15 @@ export default function CardModal({
                             className="rounded-md p-2 md:px-4 inline-flex items-center space-x-2 bg-primary text-[#171923] text-sm"
                             href="#"
                         >
-                            <img src="./assets/icons/checkout.svg" width="24" height="24" alt="" />
+                            <img src={checkoutIcon} width="24" height="24" alt="" />
                             <span>Checkout</span>
                         </a>
-                        <a
+                        <button
                             onClick={onClose}
                             className="border border-[#74766F] rounded-lg py-2 px-5 flex items-center justify-center gap-2 text-[#6F6F6F] dark:text-gray-200 font-semibold text-sm"
-                            href="#"
                         >
                             Cancel
-                        </a>
+                        </button>
                     </div>
                 </div>
             </div>

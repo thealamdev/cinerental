@@ -1,5 +1,7 @@
+import { useContext } from "react";
 import { getMovieUrl } from "../../utility/getMovieUrl";
 import tag from './../../assets/tag.svg';
+import { CardContext } from "../../contexts/CardContext";
 
 interface PageProps {
     onClose: () => void;
@@ -10,6 +12,18 @@ export default function DetailsModal({
     movie,
     onClose
 }: PageProps) {
+    const { card, setCard } = useContext(CardContext)!;
+
+    const handleAddCard = (event: any, movie: any) => {
+        event.stopPropagation();
+        const exist = card.find((item) => item.id == movie.id);
+        if (exist) {
+            alert('Already added to the card');
+        }
+        if (!exist) {
+            setCard([...card, movie])
+        }
+    }
     return (
         <div
             className="fixed top-0 left-0 w-screen h-screen z-50 bg-black/60 backdrop-blur-sm"
@@ -39,6 +53,7 @@ export default function DetailsModal({
                             <a
                                 className="bg-primary rounded-lg py-2 px-5 flex items-center justify-center gap-2 text-[#171923] font-semibold text-sm"
                                 href="#"
+                                onClick={(e:any) => handleAddCard(e, movie)}
                             >
                                 <img src={tag} alt="tag" />
                                 <span>${movie.price} | Add to Cart</span>
