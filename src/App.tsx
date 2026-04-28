@@ -1,5 +1,6 @@
 import Footer from "./components/cine/Footer"
 import MovieList from "./components/cine/MovieList"
+import VideoUploadToCloudinary from "./components/cine/VideoUploadToCloudinary"
 import Header from "./Header"
 import CardProvider from "./providers/CardProvider"
 import Sidebar from "./Sidebar"

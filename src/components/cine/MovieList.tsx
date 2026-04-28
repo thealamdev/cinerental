@@ -1,13 +1,15 @@
 import { getMovies } from "../../data/movie";
 import MovieCard from "./MovieCard";
+import VideoUploadToCloudinary from "./VideoUploadToCloudinary";
 
 export default function MovieList() {
     return (
         <div className="content">
             <div className="grid sm:grid-cols-2 xl:grid-cols-3 gap-7">
-                {getMovies().map((movie) => (
+                {/* {getMovies().map((movie) => (
                     <MovieCard key={movie.id} movie={movie} />
-                ))}
+                ))} */}
+                <VideoUploadToCloudinary />
             </div>
         </div>
     )
