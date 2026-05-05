@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const CLOUD_NAME = 'eventmetro';
+const CLOUD_NAME = 'efoliohub';
 const UPLOAD_PRESET = "efoliohub_video";
 const CHUNK_SIZE = 6 * 1024 * 1024;
 
